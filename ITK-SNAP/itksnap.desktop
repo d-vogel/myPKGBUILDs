@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=ITK-SNAP
+
+GenericName=Medical images visualizer
+
+Comment=ITK-SNAP is a tool for segmenting anatomical structures in medical images.
+
+Exec=itksnap
+Icon=/usr/share/icons/itksnap.png
+Categories=Science

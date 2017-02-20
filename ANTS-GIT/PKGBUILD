@@ -1,0 +1,44 @@
+# Maintainer: Dorian Vogel <dorianvogel at gmail dot com>
+
+_pkgname=ants
+pkgname=$_pkgname-git
+pkgver=2.1.0.719.g0b42e26f
+pkgrel=1
+pkgdesc='Advanced Normalization Tools.'
+arch=('i686' 'x86_64')
+url='https://github.com/stnava/ANTs'
+license=('BSD-3')
+depends=('vtk' 'qt5-base' 'openmpi' 'unixodbc')
+makedepends=('git' 'cmake')
+provides=("$_pkgname"{,-git})
+conflicts=("$_pkgname"{,-git})
+source=("$_pkgname::git://github.com/stnava/ANTs.git")
+sha256sums=("SKIP")
+
+pkgver() {
+  cd $_pkgname
+  git describe --always | sed 's:^v::;s:-:.:g'
+}
+
+
+build() {
+  rm -Rf build && mkdir build
+  ITK_DIR=/usr/lib64/cmake/ITK-4.11
+  cd build
+  cmake $srcdir/$_pkgname \
+        -DUSE_SYSTEM_ITK=ON \
+        -DUSE_SYSTEM_SlicerExecutionModel=ON
+  make
+}
+
+package() {
+
+  mkdir -p ${pkgdir}/usr/bin
+  install -D -m755 $srcdir/build/bin/* ${pkgdir}/usr/bin
+
+  mkdir -p $pkgdir/usr/lib/ants
+  install -t $pkgdir/usr/lib/ants $srcdir/build/lib/*
+  install -t $pkgdir/usr/lib/ants $srcdir/ants/Scripts/*
+  mkdir -p $pkgdir/etc/profile.d
+  echo "export ANTSPATH=/usr/bin">> $pkgdir/etc/profile.d/ants.sh
+}

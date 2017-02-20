@@ -1,0 +1,43 @@
+# Maintainer: Dorian Vogel <dorianvogel at gmail dot com>
+
+_pkgname=itk-snap
+pkgname=$_pkgname-git
+pkgver=3.2.0.345.gcc23dcb
+pkgrel=1
+pkgdesc='ITK-SNAP is a tool for segmenting anatomical structures in medical images.'
+arch=('i686' 'x86_64')
+url='http://www.itksnap.org/'
+license=('GPLv3')
+depends=('vtk' 'qt5-base' 'openmpi' 'unixodbc')
+makedepends=('git' 'cmake')
+provides=("$_pkgname"{,-git})
+conflicts=("$_pkgname"{,-git})
+source=("$_pkgname::git://git.code.sf.net/p/itk-snap/src")
+sha256sums=("SKIP")
+
+pkgver() {
+  cd $_pkgname
+  git describe --always | sed 's:^v::;s:-:.:g'
+}
+
+prepare(){
+  cd $srcdir/$_pkgname
+  git submodule init
+  git submodule update
+  cd ../..
+}
+
+build() {
+  rm -Rf build && mkdir build
+  cd build
+  cmake $srcdir/$_pkgname
+  make
+}
+
+package() {
+  cd build
+  make DESTDIR="$pkgdir" install
+  cd ../..
+  install -D -m644 itksnap.desktop ${pkgdir}/usr/share/applications/itksnap.desktop
+  install -D -m644 $srcdir/$_pkgname/GUI/Qt/Resources/logo_square.png ${pkgdir}/usr/share/icons/itksnap.png
+}

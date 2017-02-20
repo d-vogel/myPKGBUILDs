@@ -1,0 +1,23 @@
+pkgbase = itk-snap-git
+	pkgdesc = ITK-SNAP is a tool for segmenting anatomical structures in medical images.
+	pkgver = 3.2.0.345.gcc23dcb
+	pkgrel = 1
+	url = http://www.itksnap.org/
+	arch = i686
+	arch = x86_64
+	license = GPLv3
+	makedepends = git
+	makedepends = cmake
+	depends = vtk
+	depends = qt5-base
+	depends = openmpi
+	depends = unixodbc
+	provides = itk-snap
+	provides = itk-snap-git
+	conflicts = itk-snap
+	conflicts = itk-snap-git
+	source = itk-snap::git://git.code.sf.net/p/itk-snap/src
+	sha256sums = SKIP
+
+pkgname = itk-snap-git
+
