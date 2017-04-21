@@ -1,0 +1,64 @@
+diff --git a/PKGBUILD_fromAur b/PKGBUILD_withVTKbool
+index 5b1e093..06fb008 100644
+--- a/PKGBUILD_fromAur
++++ b/PKGBUILD_withVTKbool
+@@ -22,9 +22,11 @@ depends=('qt5-tools' 'qt5-x11extras'  'qt5-xmlpatterns'
+          'ospray' 'cgns')
+ makedepends=('cmake' 'mesa' 'gcc-fortran')
+ source=("http://paraview.org/files/v${pkgver:0:3}/ParaView-v${_pkgver}.tar.gz"
+-        'paraview-desktop.patch')
++        'paraview-desktop.patch'
++        'git://github.com/zippy84/vtkbool.git')
+ sha1sums=('c8a31039b189e63b20618bbfa91e89555ce62b6d'
+-          'd7da23daca34cd015294c4d2f702cdc4a81f0853')
++          'd7da23daca34cd015294c4d2f702cdc4a81f0853'
++          'SKIP')
+ 
+ prepare() {
+   cd "${srcdir}/ParaView-v${_pkgver}"
+@@ -32,11 +34,14 @@ prepare() {
+   patch -p1 -i ../paraview-desktop.patch
+ 
+   #rm -rf "${srcdir}/build"
+-  mkdir -p "${srcdir}/build"
++  mkdir -p "${srcdir}/paraview-build"
++  mkdir -p "${srcdir}/vtkbool-build"
+ }
+ 
+ build() {
+-  cd "${srcdir}/build"
++  #first build paraview
++  
++  cd "${srcdir}/paraview-build"
+ 
+   # flags to enable system libs
+   # add PROTOBUF when https://gitlab.kitware.com/paraview/paraview/issues/13656 gets fixed
+@@ -74,10 +79,20 @@ build() {
+     ../ParaView-v${_pkgver}
+ 
+   make
++
++  #then vtkbool filter
++
++  cd "${srcdir}/vtkbool-build"
++
++  cmake \
++    -DParaView_DIR="${srcdir}/paraview-build"\
++    ../vtkbool
++  make
++
+ }
+ 
+ package() {
+-  cd "${srcdir}/build"
++  cd "${srcdir}/paraview-build"
+ 
+   make DESTDIR="${pkgdir}" install
+ 
+@@ -86,4 +101,6 @@ package() {
+ 
+   # Remove IceT man pages to avoid conflicts
+   rm -- "${pkgdir}/usr/share/man/man3/icet"*.3
++
++  install -Dm644 "${srcdir}/vtkbool-build/paraview_plugin/libPolyDataBooleanFilter.so" "${pkgdir}/usr/lib/paraview-${pkgver:0:3}/plugins/libPolyDataBooleanFilter.so"
+ }
