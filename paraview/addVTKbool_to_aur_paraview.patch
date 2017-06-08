@@ -1,6 +1,6 @@
-diff --git a/PKGBUILD_fromAur b/PKGBUILD_withVTKbool
+diff --git a/PKGBUILD b/PKGBUILD_withVTKbool
 index 5b1e093..06fb008 100644
---- a/PKGBUILD_fromAur
+--- a/PKGBUILD
 +++ b/PKGBUILD_withVTKbool
 @@ -22,9 +22,11 @@ depends=('qt5-tools' 'qt5-x11extras'  'qt5-xmlpatterns'
           'ospray' 'cgns')
