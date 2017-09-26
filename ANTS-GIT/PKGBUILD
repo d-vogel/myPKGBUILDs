@@ -2,17 +2,17 @@
 
 _pkgname=ants
 pkgname=$_pkgname-git
-pkgver=2.1.0.719.g0b42e26f
+pkgver=2.1.0.858.ge51b7429
 pkgrel=1
 pkgdesc='Advanced Normalization Tools.'
 arch=('i686' 'x86_64')
-url='https://github.com/stnava/ANTs'
+url='https://github.com/ANTsX/ANTs.git'
 license=('BSD-3')
 depends=('vtk' 'qt5-base' 'openmpi' 'unixodbc')
 makedepends=('git' 'cmake')
 provides=("$_pkgname"{,-git})
 conflicts=("$_pkgname"{,-git})
-source=("$_pkgname::git://github.com/stnava/ANTs.git")
+source=("$_pkgname::git://github.com/ANTsX/ANTs.git")
 sha256sums=("SKIP")
 
 pkgver() {
