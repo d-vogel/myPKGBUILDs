@@ -26,7 +26,9 @@ build() {
   ITK_DIR=/usr/lib64/cmake/ITK-*
   cd build
   cmake $srcdir/$_pkgname \
-        -DUSE_SYSTEM_ITK=ON
+        -DUSE_SYSTEM_ITK:BOOL=ON \
+        -DRUN_LONG_TESTS:BOOL=OFF \
+        -DRUN_SHORT_TESTS:BOOL=OFF
   make
 }
 
