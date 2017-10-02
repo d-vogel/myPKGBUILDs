@@ -22,7 +22,7 @@ pkgver() {
 }
 
 build() {
-  rm -Rf build && mkdir build
+  #rm -Rf build && mkdir build
   cd build
   cmake $srcdir/$_pkgname \
       -DCMAKE_INSTALL_PREFIX=/usr \
@@ -45,5 +45,5 @@ package() {
   cd build
   make DESTDIR="$pkgdir" install
   #update the FindGTest module with the one from ITK. This one defines GTest::GTest and GTest::Main aliases required for ANTS
-  install -D -m755 $srcdir/CMake/FindGTest.cmake ${pkgdir}/usr/share/cmake-3.9/Modules/FindGTest.cmake
+  install -D -m755 $srcdir/$_pkgname/CMake/FindGTest.cmake ${pkgdir}/usr/share/cmake-3.9/Modules/FindGTest.cmake
 }
