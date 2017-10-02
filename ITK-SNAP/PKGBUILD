@@ -2,7 +2,7 @@
 
 _pkgname=itk-snap
 pkgname=$_pkgname-git
-pkgver=3.2.0.345.gcc23dcb
+pkgver=3.6.0.6.g9f654ed
 pkgrel=1
 pkgdesc='ITK-SNAP is a tool for segmenting anatomical structures in medical images.'
 arch=('i686' 'x86_64')
@@ -12,8 +12,10 @@ depends=('vtk' 'qt5-base' 'openmpi' 'unixodbc')
 makedepends=('git' 'cmake')
 provides=("$_pkgname"{,-git})
 conflicts=("$_pkgname"{,-git})
-source=("$_pkgname::git://git.code.sf.net/p/itk-snap/src")
-sha256sums=("SKIP")
+source=("$_pkgname::git://git.code.sf.net/p/itk-snap/src"
+        "CMakeLists.patch")
+sha256sums=("SKIP"
+            "SKIP")
 
 pkgver() {
   cd $_pkgname
@@ -21,10 +23,12 @@ pkgver() {
 }
 
 prepare(){
+    patch -p1 -i CMakeLists.patch
   cd $srcdir/$_pkgname
   git submodule init
   git submodule update
   cd ../..
+  
 }
 
 build() {
