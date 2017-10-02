@@ -1,0 +1,11 @@
+--- src/itk-snap/CMakeLists.txt	2017-10-02 09:32:49.481480629 +0200
++++ src/itk-snap/CMakeLists.txt	2017-10-02 09:32:38.294789458 +0200
+@@ -922,6 +922,8 @@
+ # Define External Libraries
+ #--------------------------------------------------------------------------------
+ 
++find_package(GTest REQUIRED)
++
+ # ITK Libraries
+ SET(SNAP_ITK_LIBS ${ITK_LIBRARIES})
+ 
