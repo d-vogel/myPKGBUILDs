@@ -1,8 +1,9 @@
-# Maintainer: Peter Mattern <pmattern at arcor dot de>
+ # Original Maintainer at aur: Peter Mattern <pmattern at arcor dot de>
+ # Maintainer: Dorian Vogel <dorianvogel at gmail dot com>
 
 _pkgname=itk
 pkgname=$_pkgname-git
-pkgver=4.10rc02.25.gbf3f02c
+pkgver=4.12.2.298.g044acc78a9
 pkgrel=1
 pkgdesc='Open-source, cross-platform C++ toolkit for segmentation and registration'
 arch=('i686' 'x86_64')
@@ -25,20 +26,24 @@ build() {
   cd build
   cmake $srcdir/$_pkgname \
       -DCMAKE_INSTALL_PREFIX=/usr \
-      -DBUILD_SHARED_LIBS=ON \
-      -DBUILD_TESTING=OFF \
-      -DITK_USE_SYSTEM_LIBRARIES=ON \
-      -DITK_USE_SYSTEM_GDCM=ON \
-      -DITK_WRAP_JAVA=OFF \
-      -DITK_WRAP_PERL=OFF \
-      -DITK_WRAP_PYTHON=OFF \
-      -DITK_WRAP_RUBY=OFF \
-      -DITK_WRAP_TCL=OFF\
-      -DITKV3_COMPATIBILITY=ON
+      -DBUILD_SHARED_LIBS:BOOL=ON \
+      -DBUILD_TESTING:BOOL=OFF \
+      -DBUILD_EXAMPLES:BOOL=OFF \
+      -DITK_USE_SYSTEM_LIBRARIES:BOOL=ON \
+      -DITK_USE_SYSTEM_GDCM:BOOL=ON \
+      -DITK_WRAP_JAVA:BOOL=OFF \
+      -DITK_WRAP_PERL:BOOL=OFF \
+      -DITK_WRAP_PYTHON:BOOL=OFF \
+      -DITK_WRAP_RUBY:BOOL=OFF \
+      -DITK_WRAP_TCL:BOOL=OFF\
+      -DITKV3_COMPATIBILITY:BOOL=ON\
+      -DModule_ITKReview:BOOL=ON
   make
 }
 
 package() {
   cd build
   make DESTDIR="$pkgdir" install
+  #update the FindGTest module with the one from ITK. This one defines GTest::GTest and GTest::Main aliases required for ANTS
+  install -D -m755 $srcdir/CMake/FindGTest.cmake ${pkgdir}/usr/share/cmake-3.9/Modules/FindGTest.cmake
 }
