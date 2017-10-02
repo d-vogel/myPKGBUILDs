@@ -2,11 +2,11 @@
 
 _pkgname=ants
 pkgname=$_pkgname-git
-pkgver=2.1.0.858.ge51b7429
+pkgver=2.1.0.859.g6b8d77da
 pkgrel=1
 pkgdesc='Advanced Normalization Tools.'
 arch=('i686' 'x86_64')
-url='https://github.com/ANTsX/ANTs.git'
+url='https://github.com/ANTsX/ANTs'
 license=('BSD-3')
 depends=('vtk' 'qt5-base' 'openmpi' 'unixodbc')
 makedepends=('git' 'cmake')
@@ -23,11 +23,10 @@ pkgver() {
 
 build() {
   rm -Rf build && mkdir build
-  ITK_DIR=/usr/lib64/cmake/ITK-4.11
+  ITK_DIR=/usr/lib64/cmake/ITK-*
   cd build
   cmake $srcdir/$_pkgname \
-        -DUSE_SYSTEM_ITK=ON \
-        -DUSE_SYSTEM_SlicerExecutionModel=ON
+        -DUSE_SYSTEM_ITK=ON
   make
 }
 
