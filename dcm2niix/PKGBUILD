@@ -1,0 +1,33 @@
+# Maintainer: Dorian Vogel <dorianvogel at gmail dot com>
+
+_pkgname=dcm2niix
+pkgname=$_pkgname-git
+pkgver=20160606.369.g72df1e7
+pkgrel=1
+pkgdesc='dcm2nii DICOM to NIfTI converter'
+arch=('i686' 'x86_64')
+url='https://www.nitrc.org/plugins/mwiki/index.php/dcm2nii:MainPage'
+license=('various')
+depends=('')
+makedepends=('git' 'cmake' 'pkg-config')
+provides=("$_pkgname" "dcm2nii"{,-git})
+conflicts=("$_pkgname" "dcm2nii"{,-git})
+source=("$_pkgname::git://github.com/rordenlab/dcm2niix.git")
+sha256sums=("SKIP")
+
+pkgver() {
+  cd $_pkgname
+  git describe --always | sed 's:^v::;s:-:.:g'
+}
+
+build() {
+  mkdir build && cd build
+  cmake $srcdir/$_pkgname \
+    -DCMAKE_INSTALL_PREFIX=/usr
+    make
+}
+
+package() {
+  make DESTDIR="$pkgdir" install  
+}
+
