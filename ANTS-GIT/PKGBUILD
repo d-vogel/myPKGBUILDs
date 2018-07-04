@@ -2,7 +2,7 @@
 
 _pkgname=ants
 pkgname=$_pkgname-git
-pkgver=2.1.0.859.g6b8d77da
+pkgver=2.3.1.7.ge1893f74
 pkgrel=1
 pkgdesc='Advanced Normalization Tools.'
 arch=('i686' 'x86_64')

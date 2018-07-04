@@ -3,7 +3,7 @@
 
 _pkgname=itk
 pkgname=$_pkgname-git
-pkgver=4.12.2.298.g044acc78a9
+pkgver=5.0a02.122.g30381ed589
 pkgrel=1
 pkgdesc='Open-source, cross-platform C++ toolkit for segmentation and registration'
 arch=('i686' 'x86_64')
@@ -13,7 +13,7 @@ depends=('hdf5-cpp-fortran' 'gdcm' 'libjpeg-turbo' 'libpng' 'libtiff')
 makedepends=('git' 'cmake')
 provides=("$_pkgname" "insight-toolkit"{,-git})
 conflicts=("$_pkgname" "insight-toolkit"{,-git})
-source=("$_pkgname::git://git.code.sf.net/p/itk/code")
+source=("$_pkgname::git://github.com/InsightSoftwareConsortium/ITK")
 sha256sums=("SKIP")
 
 pkgver() {
@@ -22,8 +22,9 @@ pkgver() {
 }
 
 build() {
-  #rm -Rf build && mkdir build
+  rm -Rf build && mkdir build
   cd build
+  CC=clang CXX=clang++\
   cmake $srcdir/$_pkgname \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DBUILD_SHARED_LIBS:BOOL=ON \
@@ -36,7 +37,6 @@ build() {
       -DITK_WRAP_PYTHON:BOOL=OFF \
       -DITK_WRAP_RUBY:BOOL=OFF \
       -DITK_WRAP_TCL:BOOL=OFF\
-      -DITKV3_COMPATIBILITY:BOOL=ON\
       -DModule_ITKReview:BOOL=ON
   make
 }
@@ -45,5 +45,5 @@ package() {
   cd build
   make DESTDIR="$pkgdir" install
   #update the FindGTest module with the one from ITK. This one defines GTest::GTest and GTest::Main aliases required for ANTS
-  install -D -m755 $srcdir/$_pkgname/CMake/FindGTest.cmake ${pkgdir}/usr/share/cmake-3.9/Modules/FindGTest.cmake
+  #install -D -m755 $srcdir/$_pkgname/CMake/FindGTest.cmake ${pkgdir}/usr/share/cmake-3.9/Modules/FindGTest.cmake
 }

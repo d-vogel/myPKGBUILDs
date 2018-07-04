@@ -2,7 +2,7 @@
 
 _pkgname=itk-snap
 pkgname=$_pkgname-git
-pkgver=3.6.0.6.g9f654ed
+pkgver=3.6.0.45.g7317c52e
 pkgrel=1
 pkgdesc='ITK-SNAP is a tool for segmenting anatomical structures in medical images.'
 arch=('i686' 'x86_64')
