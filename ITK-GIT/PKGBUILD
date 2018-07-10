@@ -3,7 +3,7 @@
 
 _pkgname=itk
 pkgname=$_pkgname-git
-pkgver=5.0a02.122.g30381ed589
+pkgver=5.0a02.145.g2ae7b67ce0
 pkgrel=1
 pkgdesc='Open-source, cross-platform C++ toolkit for segmentation and registration'
 arch=('i686' 'x86_64')
@@ -32,6 +32,7 @@ build() {
       -DBUILD_EXAMPLES:BOOL=OFF \
       -DITK_USE_SYSTEM_LIBRARIES:BOOL=ON \
       -DITK_USE_SYSTEM_GDCM:BOOL=ON \
+      -DITK_USE_GPU:BOOL=ON \
       -DITK_WRAP_JAVA:BOOL=OFF \
       -DITK_WRAP_PERL:BOOL=OFF \
       -DITK_WRAP_PYTHON:BOOL=OFF \
