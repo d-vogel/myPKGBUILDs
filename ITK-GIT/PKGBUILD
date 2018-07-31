@@ -13,7 +13,7 @@ depends=('hdf5-cpp-fortran' 'gdcm' 'libjpeg-turbo' 'libpng' 'libtiff')
 makedepends=('git' 'cmake')
 provides=("$_pkgname" "insight-toolkit"{,-git})
 conflicts=("$_pkgname" "insight-toolkit"{,-git})
-source=("$_pkgname::git://github.com/InsightSoftwareConsortium/ITK")
+source=("$_pkgname::https://github.com/InsightSoftwareConsortium/ITK.git")
 sha256sums=("SKIP")
 
 pkgver() {
