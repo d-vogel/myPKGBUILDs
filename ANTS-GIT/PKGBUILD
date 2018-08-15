@@ -12,7 +12,7 @@ depends=('vtk' 'qt5-base' 'openmpi' 'unixodbc')
 makedepends=('git' 'cmake')
 provides=("$_pkgname"{,-git})
 conflicts=("$_pkgname"{,-git})
-source=("$_pkgname::git://github.com/ANTsX/ANTs.git")
+source=("$_pkgname::git+https://github.com/ANTsX/ANTs.git")
 sha256sums=("SKIP")
 
 pkgver() {
