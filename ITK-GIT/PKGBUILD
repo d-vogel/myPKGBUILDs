@@ -3,7 +3,7 @@
 
 _pkgname=itk
 pkgname=$_pkgname-git
-pkgver=5.0a02.145.g2ae7b67ce0
+pkgver=5.0a02.317.g6b41fe1cbf
 pkgrel=1
 pkgdesc='Open-source, cross-platform C++ toolkit for segmentation and registration'
 arch=('i686' 'x86_64')

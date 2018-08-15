@@ -2,7 +2,7 @@
 
 _pkgname=ants
 pkgname=$_pkgname-git
-pkgver=2.3.1.7.ge1893f74
+pkgver=2.3.1.36.g82dcdd64
 pkgrel=1
 pkgdesc='Advanced Normalization Tools.'
 arch=('i686' 'x86_64')
@@ -28,7 +28,7 @@ build() {
   CC=clang CXX=clang++\
   cmake $srcdir/$_pkgname \
         -DUSE_SYSTEM_ITK:BOOL=ON \
-	-DCOPY_SCRIPT_FILES_TO_BIN_DIR:BOOL=ON \
+	-DCOPY_SCRIPT_FILES_TO_BIN_DIR:BOOL=OFF \
         -DRUN_LONG_TESTS:BOOL=OFF \
         -DRUN_SHORT_TESTS:BOOL=OFF
   make
@@ -36,12 +36,13 @@ build() {
 
 package() {
 
-  mkdir -p ${pkgdir}/usr/bin
-  install -D -m755 $srcdir/build/bin/* ${pkgdir}/usr/bin
+#  mkdir -p ${pkgdir}/usr/bin
+#  install -D -m755 $srcdir/build/bin/* ${pkgdir}/usr/bin
 
   mkdir -p $pkgdir/usr/lib/ants
   install -t $pkgdir/usr/lib/ants $srcdir/build/lib/*
   install -t $pkgdir/usr/lib/ants $srcdir/ants/Scripts/*
+  install -D -m755 $srcdir/build/bin/* ${pkgdir}/usr/lib/ants
   mkdir -p $pkgdir/etc/profile.d
   echo "export ANTSPATH=/usr/bin">> $pkgdir/etc/profile.d/ants.sh
 }
