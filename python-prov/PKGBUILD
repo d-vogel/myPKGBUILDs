@@ -13,7 +13,7 @@ depends=()
 makedepends=('git' 'python')
 provides=("$_pkgname"{,-git})
 conflicts=("$_pkgname"{,-git})
-source=("$_pkgname::git://github.com/trungdong/prov.git")
+source=("$_pkgname::git+https://github.com/trungdong/prov.git")
 sha256sums=("SKIP")
 
 pkgver() {
