@@ -45,5 +45,5 @@ package() {
   install -D -m755 $srcdir/build/bin/* ${pkgdir}/usr/lib/ants
   mkdir -p $pkgdir/etc/profile.d
   echo "export ANTSPATH=/usr/lib/ants"	>> $pkgdir/etc/profile.d/ants.sh
-  echo "export PATH=$PATH:${ANTSPATH}"	>> $pkgdir/etc/profile.d/fsl.sh
+  echo "export PATH=$PATH:${ANTSPATH}"	>> $pkgdir/etc/profile.d/ants.sh
 }
