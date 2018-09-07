@@ -48,7 +48,7 @@ build() {
 	_java_home=$(find '/usr/lib/jvm/' -name `archlinux-java get`)
 	_lua51_version=$(pacman -Qi lua51 | grep '^Version' | egrep -o '[0-9]\.[0-9]\.[0-9]')
 
-    CC=clang CXX=clang++ \
+#    CC=clang CXX=clang++ \
 		JAVA_HOME=$_java_home \
 		cmake \
 			-DCMAKE_INSTALL_PREFIX=/usr \
