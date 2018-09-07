@@ -3,7 +3,7 @@
 
 _pkgname=itk
 pkgname=$_pkgname-git
-pkgver=5.0a02.317.g6b41fe1cbf
+pkgver=5.0a02.382.gf44174c188
 pkgrel=1
 pkgdesc='Open-source, cross-platform C++ toolkit for segmentation and registration'
 arch=('i686' 'x86_64')
@@ -13,7 +13,8 @@ depends=('hdf5-cpp-fortran' 'gdcm' 'libjpeg-turbo' 'libpng' 'libtiff')
 makedepends=('git' 'cmake')
 provides=("$_pkgname" "insight-toolkit"{,-git})
 conflicts=("$_pkgname" "insight-toolkit"{,-git})
-source=("$_pkgname::git+https://github.com/InsightSoftwareConsortium/ITK.git")
+#source=("$_pkgname::git+https://github.com/InsightSoftwareConsortium/ITK.git")
+source=("$_pkgname::git+https://github.com/stnava/ITK.git")
 sha256sums=("SKIP")
 
 pkgver() {
@@ -24,7 +25,6 @@ pkgver() {
 build() {
   rm -Rf build && mkdir build
   cd build
-  CC=clang CXX=clang++\
   cmake $srcdir/$_pkgname \
       -DCMAKE_INSTALL_PREFIX=/usr \
       -DBUILD_SHARED_LIBS:BOOL=ON \
