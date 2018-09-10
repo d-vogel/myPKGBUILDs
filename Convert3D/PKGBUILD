@@ -1,0 +1,24 @@
+# Maintainer: Dorian Vogel dorianvogel [at] gmail.com
+
+pkgname=c3d
+pkgver=1.1.0
+pkgrel=1
+pkgdesc="C3D is a command-line tool for converting 3D images between common file formats."
+url="https://sourceforge.net/projects/c3d/"
+arch=('x86_64')
+license=('GPLv2')
+depends=()
+source=("c3d-nightly-Linux-gcc64.tar.gz::https://dl.sourceforge.net/project/c3d/c3d/Nightly/c3d-nightly-Linux-gcc64.tar.gz")
+sha512sums=('SKIP')
+
+pkgver() {
+  ls -d */ | sed 's:[a-zA-Z]::g'|cut -d '-' -f 2
+}
+
+package() {
+  mkdir -p "$pkgdir/opt/c3d"
+  mkdir -p "$pkgdir/usr/bin"
+  mv "$srcdir/c3d-$pkgver-Linux-gcc64/"* "$pkgdir/opt/c3d"
+  ln -s $pkgdir/opt/c3d/bin/* $pkgdir/usr/bin/
+}
+
