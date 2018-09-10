@@ -8,7 +8,7 @@ url="https://sourceforge.net/projects/c3d/"
 arch=('x86_64')
 license=('GPLv2')
 depends=()
-source=("c3d-nightly-Linux-gcc64.tar.gz::https://dl.sourceforge.net/project/c3d/c3d/Nightly/c3d-nightly-Linux-gcc64.tar.gz")
+source=("c3d-nightly-Linux-gcc64.tar.gz::https://downloads.sourceforge.net/project/c3d/c3d/Nightly/c3d-nightly-Linux-gcc64.tar.gz?r=https%3A%2F%2Fsourceforge.net%2Fprojects%2Fc3d%2Ffiles%2Flatest%2Fdownload&ts=1536583412")
 sha512sums=('SKIP')
 
 pkgver() {
