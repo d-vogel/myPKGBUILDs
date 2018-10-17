@@ -18,7 +18,10 @@ pkgver() {
 package() {
   mkdir -p "$pkgdir/opt/c3d"
   mkdir -p "$pkgdir/usr/bin"
-  mv "$srcdir/c3d-$pkgver-Linux-gcc64/"* "$pkgdir/opt/c3d"
-  ln -s $pkgdir/opt/c3d/bin/* $pkgdir/usr/bin/
+  cp -r $srcdir/c3d-$pkgver-Linux-gcc64/* $pkgdir/opt/c3d/
+  for thisBin in $(ls $pkgdir/opt/c3d/bin)
+  do
+      ln -s /opt/c3d/bin/$(basename $thisBin) $pkgdir/usr/bin/
+  done
 }
 
